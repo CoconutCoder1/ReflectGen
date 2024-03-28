@@ -21,5 +21,5 @@ Then getting information about a user-defined type:
 
 class MyObject {}
 
-const reflectgen::TypeInfo* myObjectInfoPtr = reflectgen::getTypeInfo<MyObject>
+const reflectgen::TypeInfo* myObjectInfoPtr = reflectgen::getTypeInfo<MyObject>();
 ```
