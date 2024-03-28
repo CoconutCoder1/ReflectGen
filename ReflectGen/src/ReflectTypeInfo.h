@@ -1,8 +1,3 @@
-#pragma once
-#include <string>
-
-const std::string ReflectGen_Types_Header = R"(
-
 #ifndef REFLECTGEN_TYPES_H
 #define REFLECTGEN_TYPES_H
 
@@ -47,5 +42,3 @@ const TypeInfo* getTypeInfo() noexcept
 } // namespace reflectgen
 
 #endif
-
-)";

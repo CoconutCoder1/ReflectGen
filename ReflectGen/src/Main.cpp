@@ -1,5 +1,5 @@
 #include "pch.h"
-#include "TypeInfoHeader.h"
+#include "ReflectTypeInfo.h"
 
 namespace fs = std::filesystem;
 
@@ -37,7 +37,6 @@ private:
 	bool isValidFile(const fs::path& filePath) noexcept;
 	void findTypes(const std::string& contents) noexcept;
 	void tokenizeFile(const std::string& contents, std::vector<std::string>& tokens) noexcept;
-	void createTypeInfoHeader(const std::string& fileName) noexcept;
 	void generateTypeFile(const std::string& fileName) noexcept;
 
 private:
@@ -76,7 +75,6 @@ void ReflectGen::generate(const std::string& projectRootDir) noexcept
 
 	fs::create_directory(outputDirectory);
 
-	createTypeInfoHeader(outputDirectory);
 	generateTypeFile(outputDirectory);
 }
 
@@ -196,17 +194,6 @@ void ReflectGen::tokenizeFile(const std::string& contents, std::vector<std::stri
 			buffer.clear();
 		}
 	}
-}
-
-/**
- * Create type info header
- * which the project will include for accessing type info.
- */
-void ReflectGen::createTypeInfoHeader(const std::string& fileName) noexcept
-{
-	std::ofstream fileStream(fileName + ReflectGen_HeaderName);
-	fileStream.write(ReflectGen_Types_Header.c_str(), ReflectGen_Types_Header.size());
-	fileStream.close();
 }
 
 /**

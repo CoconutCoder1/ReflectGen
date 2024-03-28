@@ -136,7 +136,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
-    <ClInclude Include="src\TypeInfoHeader.h" />
+    <ClInclude Include="src\ReflectTypeInfo.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">

@@ -18,7 +18,7 @@
     <ClInclude Include="pch.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\TypeInfoHeader.h">
+    <ClInclude Include="src\ReflectTypeInfo.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
