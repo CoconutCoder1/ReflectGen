@@ -10,6 +10,7 @@
 #include <format>
 #include <fstream>
 #include <cassert>
+#include <filesystem>
 
 // Data structures
 #include <string>

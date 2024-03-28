@@ -1,8 +1,6 @@
 #include "pch.h"
 #include "TypeInfoHeader.h"
 
-#include <filesystem>
-
 namespace fs = std::filesystem;
 
 #if !defined(NDEBUG)
