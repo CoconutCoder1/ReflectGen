@@ -19,7 +19,7 @@ Then getting information about a user-defined type:
 ```cpp
 #include "gen/ReflectTypeInfo.h"
 
-class MyObject {}
+class MyObject {};
 
 const reflectgen::TypeInfo* myObjectInfoPtr = reflectgen::getTypeInfo<MyObject>();
 ```
