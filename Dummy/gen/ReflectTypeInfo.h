@@ -7,6 +7,9 @@
 
 namespace reflectgen {
 
+/* ReflectGen_Field */
+#define RG_FIELD
+
 class TypeInfo
 {
 public:
