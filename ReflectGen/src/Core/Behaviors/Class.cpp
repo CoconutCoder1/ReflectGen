@@ -10,8 +10,6 @@ void ClassBehavior::handle(const ReflectContext& context)
 {
 	TokenContext* tokenContextPtr = context.tokenContext;
 
-	const auto& nameSpaceStack = context.scopeManager->getScopeList(ScopeType_Namespace);
-
 	const auto& className = tokenContextPtr->getToken(1);
 	const auto& prevToken = tokenContextPtr->getToken(-1);
 
@@ -20,7 +18,7 @@ void ClassBehavior::handle(const ReflectContext& context)
 		return;
 
 	/* class Object; */
-	const auto& isForwardDecl = tokenContextPtr->getToken(2) == ";";
+	const bool isForwardDecl = tokenContextPtr->getToken(2) == ";";
 
 	TypeDesc desc;
 	desc.name = className;

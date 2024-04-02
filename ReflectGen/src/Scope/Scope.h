@@ -7,6 +7,7 @@ enum ScopeType : int
 	ScopeType_Multiple,
 	ScopeType_Class,
 	ScopeType_Struct,
+	ScopeType_Enum,
 	ScopeType_Count,
 };
 

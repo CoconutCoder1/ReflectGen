@@ -17,11 +17,15 @@ CommonTypeBehavior::CommonTypeBehavior(size_t typeSize, const char* typeNamePtr)
 
 void CommonTypeBehavior::handle(const ReflectContext& context)
 {
+	/* Get attributes for the used type */
 	mAttributes = context.tokenContext->getTypeAttributes();
 
+	/* Clear list of attributes for the next type */
 	context.tokenContext->clearTypeAttributes();
 
+#if 1 /* Debug print */
 	printf("Type Detected: [ Name: \"%s\", Size: %x, Attributes: %x ]\n", mTypeNamePtr, mTypeSize, mAttributes);
+#endif
 }
 
 size_t CommonTypeBehavior::getTypeSize() const

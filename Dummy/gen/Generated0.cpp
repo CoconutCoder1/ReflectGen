@@ -12,6 +12,7 @@ class MyObject;
 } // mynamespace2
 namespace mynamespace3{
 class MyObject;
+enum MyEnum;
 } // mynamespace3
 } // mynamespace
 
@@ -23,5 +24,6 @@ const TypeInfo* detail::DTI<NewClass>::mTypeInfoPtr = new detail::TypeInfoImpl<N
 const TypeInfo* detail::DTI<mynamespace::MyObject>::mTypeInfoPtr = new detail::TypeInfoImpl<mynamespace::MyObject>("mynamespace.MyObject");
 const TypeInfo* detail::DTI<mynamespace::mynamespace2::MyObject>::mTypeInfoPtr = new detail::TypeInfoImpl<mynamespace::mynamespace2::MyObject>("mynamespace.mynamespace2.MyObject");
 const TypeInfo* detail::DTI<mynamespace::mynamespace3::MyObject>::mTypeInfoPtr = new detail::TypeInfoImpl<mynamespace::mynamespace3::MyObject>("mynamespace.mynamespace3.MyObject");
+const TypeInfo* detail::DTI<mynamespace::mynamespace3::MyEnum>::mTypeInfoPtr = new detail::TypeInfoImpl<mynamespace::mynamespace3::MyEnum>("mynamespace.mynamespace3.MyEnum");
 
 } // reflectgen

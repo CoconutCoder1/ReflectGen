@@ -5,6 +5,7 @@
 
 #include "Behaviors/Class.h"
 #include "Behaviors/Struct.h"
+#include "Behaviors/Enum.h"
 #include "Behaviors/Namespace.h"
 #include "Behaviors/Scope.h"
 #include "Behaviors/CommonType.h"
@@ -85,6 +86,7 @@ void setupTokenBehaviors()
 {
 	setTokenBehavior(fnv1a32_CT("class"), new ClassBehavior);
 	setTokenBehavior(fnv1a32_CT("struct"), new StructBehavior);
+	setTokenBehavior(fnv1a32_CT("enum"), new EnumBehavior);
 
 	setTokenBehavior(fnv1a32_CT("namespace"), new NamespaceBehavior);
 

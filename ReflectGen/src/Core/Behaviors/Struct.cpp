@@ -18,7 +18,7 @@ void StructBehavior::handle(const ReflectContext& context)
 		return;
 
 	/* struct Object; */
-	const auto& isForwardDecl = tokenContextPtr->getToken(2) != "{";
+	const bool isForwardDecl = tokenContextPtr->getToken(2) == ";";
 
 	TypeDesc desc;
 	desc.name = structName;

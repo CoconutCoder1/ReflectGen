@@ -31,6 +31,10 @@ class MyObject
 {
 };
 
+enum MyEnum
+{
+};
+
 } // namespace mynamespace::mynamespace3
 
 int main()

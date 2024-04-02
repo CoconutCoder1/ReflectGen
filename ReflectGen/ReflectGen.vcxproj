@@ -138,6 +138,7 @@
     <ClInclude Include="pch.h" />
     <ClInclude Include="src\Core\Behaviors\Class.h" />
     <ClInclude Include="src\Core\Behaviors\CommonType.h" />
+    <ClInclude Include="src\Core\Behaviors\Enum.h" />
     <ClInclude Include="src\Core\Behaviors\Namespace.h" />
     <ClInclude Include="src\Core\Behaviors\Scope.h" />
     <ClInclude Include="src\Core\Behaviors\Struct.h" />
@@ -162,6 +163,7 @@
     </ClCompile>
     <ClCompile Include="src\Core\Behaviors\Class.cpp" />
     <ClCompile Include="src\Core\Behaviors\CommonType.cpp" />
+    <ClCompile Include="src\Core\Behaviors\Enum.cpp" />
     <ClCompile Include="src\Core\Behaviors\Namespace.cpp" />
     <ClCompile Include="src\Core\Behaviors\Scope.cpp" />
     <ClCompile Include="src\Core\Behaviors\Struct.cpp" />
