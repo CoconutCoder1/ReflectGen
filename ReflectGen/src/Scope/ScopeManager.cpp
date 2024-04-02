@@ -1,6 +1,8 @@
 #include "pch.h"
 #include "ScopeManager.h"
 
+Scope Scope_None = Scope("None", ScopeType_None, nullptr);
+
 void ScopeManager::pushScope(const std::string& label, ScopeType type, void* dataPtr) noexcept
 {
 	enableIgnoreScope();
@@ -34,6 +36,9 @@ size_t ScopeManager::getGenericScopeCount() const noexcept
 
 const Scope* ScopeManager::getCurrentScope() const noexcept
 {
+	if (mGenericScopes.empty())
+		return &Scope_None;
+
 	return &mGenericScopes.top();
 }
 
@@ -55,4 +60,25 @@ void ScopeManager::enableIgnoreScope() noexcept
 void ScopeManager::disableIgnoreScope() noexcept
 {
 	mShouldIgnoreScope = false;
+}
+
+void ScopeManager::beginArgumentList() noexcept
+{
+	mArgumentListContexts.push({  });
+}
+
+void ScopeManager::endArgumentList() noexcept
+{
+	if (!mArgumentListContexts.empty())
+		mArgumentListContexts.pop();
+}
+
+bool ScopeManager::isArgumentList() const noexcept
+{
+	return !mArgumentListContexts.empty();
+}
+
+ArgumentListContext& ScopeManager::getArgumentListContext() noexcept
+{
+	return mArgumentListContexts.top();
 }

@@ -20,6 +20,26 @@ void DescriptorContext::outputToFile(std::ofstream& fileStream) noexcept
 	fileStream << "\n} // reflectgen\n";
 }
 
+void DescriptorContext::beginPendingFunction()
+{
+	mIsPendingFunction = true;
+}
+
+void DescriptorContext::endPendingFunction()
+{
+	mIsPendingFunction = false;
+}
+
+FunctionDesc& DescriptorContext::getPendingFunctionDesc()
+{
+	return mFunctionDesc;
+}
+
+bool DescriptorContext::isPendingFunction() const
+{
+	return mIsPendingFunction;
+}
+
 /* Recursively forward declare all types within their namespaces */
 void DescriptorContext::forwardDeclareTypes(std::ofstream& fileStream, const NamespaceDesc* namespaceDescPtr) noexcept
 {
@@ -28,8 +48,20 @@ void DescriptorContext::forwardDeclareTypes(std::ofstream& fileStream, const Nam
 	if (isInsideNamespace)
 		fileStream << "namespace " << namespaceDescPtr->alias << "{\n";
 
+	for (const auto& func : namespaceDescPtr->mChildFunctions)
+	{
+		fileStream << "// Function: " << func.name << " | NumArguments: " << func.numArguments << "\n";
+	}
+
 	for (const auto& type : namespaceDescPtr->mChildTypes)
+	{
 		fileStream << type.defType << " " << type.name << ";\n";
+
+		for (const auto& func : type.childFunctions)
+		{
+			fileStream << "// Member Function: " << type.name << "::" << func.name << " | NumArguments: " << func.numArguments << "\n";
+		}
+	}
 
 	for (const auto& childNamespace : namespaceDescPtr->mChildNamespaces)
 		forwardDeclareTypes(fileStream, childNamespace);

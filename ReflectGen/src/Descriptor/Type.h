@@ -5,4 +5,5 @@ struct TypeDesc
 	std::string defType; /* struct, class */
 	std::string name; /* typename */
 	struct NamespaceDesc* parentNameSpace;
+	std::vector<FunctionDesc> childFunctions;
 };

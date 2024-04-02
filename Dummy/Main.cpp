@@ -29,15 +29,29 @@ namespace mynamespace::mynamespace3 {
 
 class MyObject
 {
+	void TestMemberFunction1()
+	{
+
+	}
+
+	void TestMemberFunction2(int)
+	{
+
+	}
 };
 
 enum MyEnum
 {
 };
 
+void PrintString(const char* thing)
+{
+	printf(thing);
+}
+
 } // namespace mynamespace::mynamespace3
 
-int main()
+int main(int, char**)
 {
 	/* Classes in the global namespace */
 	printf("%s\n", reflectgen::getTypeInfo<NewClass>()->mClassNameStr);
@@ -48,14 +62,10 @@ int main()
 	printf("%s\n", reflectgen::getTypeInfo<mynamespace::mynamespace2::MyObject>()->mClassNameStr);
 	printf("%s\n", reflectgen::getTypeInfo<mynamespace::mynamespace3::MyObject>()->mClassNameStr);
 
-	float f = 10.f;
-	const float cf = 50.f;
-	double d = 20.0;
-	uint64_t u64 = UINT64_MAX;
+	/* Enum */
+	printf("%s\n", reflectgen::getTypeInfo<mynamespace::mynamespace3::MyEnum>()->mClassNameStr);
 
-	printf("Float value: %f\n", f);
-	printf("Double value: %f\n", d);
-	printf("Uint64 value: %llx\n", u64);
+	int test = 10;
 
 	return 0;
 }

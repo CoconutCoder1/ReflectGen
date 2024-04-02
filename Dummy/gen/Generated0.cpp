@@ -3,6 +3,7 @@
 #include "ReflectTypeInfo.h"
 
 /* Forward declared types */
+// Function: main | NumArguments: 2
 class TestClass;
 class NewClass;
 namespace mynamespace{
@@ -11,7 +12,10 @@ namespace mynamespace2{
 class MyObject;
 } // mynamespace2
 namespace mynamespace3{
+// Function: PrintString | NumArguments: 1
 class MyObject;
+// Member Function: MyObject::TestMemberFunction1 | NumArguments: 0
+// Member Function: MyObject::TestMemberFunction2 | NumArguments: 1
 enum MyEnum;
 } // mynamespace3
 } // mynamespace

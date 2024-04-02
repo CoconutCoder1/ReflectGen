@@ -10,6 +10,7 @@
 #include "Behaviors/Scope.h"
 #include "Behaviors/CommonType.h"
 #include "Behaviors/TypeAttribute.h"
+#include "Behaviors/ArgumentList.h"
 
 #include "TypeAttributes.h"
 
@@ -69,6 +70,8 @@ void setupCommonTypes()
 	addCommonTypeBehavior<double>();
 	addCommonTypeBehavior<long>();
 
+	setTokenBehavior(fnv1a32_CT("void"), new CommonTypeBehavior(0, "void"));
+
 	// Integer types
 	ADD_COMMON_TYPE_BEHAVIOR(int8_t);
 	ADD_COMMON_TYPE_BEHAVIOR(int16_t);
@@ -92,6 +95,9 @@ void setupTokenBehaviors()
 
 	setTokenBehavior(fnv1a32_CT("{"), new BeginScopeBehavior);
 	setTokenBehavior(fnv1a32_CT("}"), new EndScopeBehavior);
+
+	setTokenBehavior(fnv1a32_CT("("), new BeginArgumentListBehavior);
+	setTokenBehavior(fnv1a32_CT(")"), new EndArgumentListBehavior);
 
 	setTokenBehavior(fnv1a32_CT("const"), new TypeAttributeBehavior(TypeAttribute_Const));
 	setTokenBehavior(fnv1a32_CT("unsigned"), new TypeAttributeBehavior(TypeAttribute_Unsigned));

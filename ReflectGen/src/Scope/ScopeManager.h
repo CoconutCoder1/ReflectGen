@@ -2,6 +2,11 @@
 
 #include "Scope.h"
 
+struct ArgumentListContext
+{
+	int mNumArguments;
+};
+
 class ScopeManager
 {
 public:
@@ -17,8 +22,15 @@ public:
 	void enableIgnoreScope() noexcept;
 	void disableIgnoreScope() noexcept;
 
+	void beginArgumentList() noexcept;
+	void endArgumentList() noexcept;
+	bool isArgumentList() const noexcept;
+	ArgumentListContext& getArgumentListContext() noexcept;
+
 private:
 	std::stack<Scope> mGenericScopes;
 	std::vector<Scope> mTypedScopes[ScopeType_Count];
 	bool mShouldIgnoreScope;
+
+	std::stack<ArgumentListContext> mArgumentListContexts;
 };

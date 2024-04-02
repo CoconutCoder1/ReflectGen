@@ -102,8 +102,6 @@ void ReflectGen::findTypes(const std::string& contents) noexcept
 	while (!mTokenContext->isEnd())
 	{
 		parseTokens();
-
-		mTokenContext->advance(1);
 	}
 }
 
@@ -217,5 +215,9 @@ void ReflectGen::parseTokens() noexcept
 	ITokenBehavior* behaviorPtr = getTokenBehavior(hash);
 
 	if (behaviorPtr)
+	{
 		behaviorPtr->handle(mContext);
+	}
+
+	mTokenContext->advance(1);
 }

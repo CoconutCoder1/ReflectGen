@@ -3,6 +3,9 @@
 
 #include "Core/TokenContext.h"
 
+#include "Scope/ScopeManager.h"
+#include "Descriptor/DescriptorContext.h"
+
 std::unordered_map<std::string, TypeAttributes> recognizedAttributes = {
 	{ "const", TypeAttribute_Const },
 	{ "unsigned", TypeAttribute_Unsigned },
@@ -23,8 +26,52 @@ void CommonTypeBehavior::handle(const ReflectContext& context)
 	/* Clear list of attributes for the next type */
 	context.tokenContext->clearTypeAttributes();
 
+	std::string labelToken = "";
+	const auto& secondToken = context.tokenContext->getToken(2);
+
+	const bool isFunction = secondToken == "(" && context.scopeManager->getCurrentScope()->type != ScopeType_Unknown;
+	const bool isVariable = (secondToken == ";" || secondToken == "=");
+	const bool isArgument = context.scopeManager->isArgumentList();
+
+	if (isArgument)
+	{
+		auto& argList = context.scopeManager->getArgumentListContext();
+
+		argList.mNumArguments++;
+	}
+	else
+	{
+		labelToken = context.tokenContext->getToken(1);
+	}
+
+	if (isFunction)
+	{
+		context.descriptorContext->beginPendingFunction();
+		auto& funcDesc = context.descriptorContext->getPendingFunctionDesc();
+
+		funcDesc.name = labelToken;
+		funcDesc.numArguments = 0;
+
+		context.scopeManager->disableIgnoreScope();
+	}
+	else if (isArgument && context.descriptorContext->isPendingFunction())
+	{
+		auto& funcDesc = context.descriptorContext->getPendingFunctionDesc();
+
+		funcDesc.numArguments++;
+	}
+
 #if 1 /* Debug print */
-	printf("Type Detected: [ Name: \"%s\", Size: %x, Attributes: %x ]\n", mTypeNamePtr, mTypeSize, mAttributes);
+	printf(
+		"Type Detected: [ Name: \"%s\", Label: \"%s\", Size: %llx, Attributes: %x, IsVariable: %s, IsArgument: %s, IsFunction: %s ]\n",
+		mTypeNamePtr,
+		labelToken.c_str(),
+		mTypeSize,
+		mAttributes,
+		isVariable ? "Yes" : "No",
+		isArgument ? "Yes" : "No",
+		isFunction ? "Yes" : "No"
+	);
 #endif
 }
 

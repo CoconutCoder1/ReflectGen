@@ -21,6 +21,7 @@ struct NamespaceDesc
 	std::string alias;
 	std::vector<NamespaceDesc*> mChildNamespaces;
 	std::vector<TypeDesc> mChildTypes;
+	std::vector<FunctionDesc> mChildFunctions;
 	NamespaceDesc* mParentNamespace;
 
 	bool operator==(const std::string& rhs) noexcept

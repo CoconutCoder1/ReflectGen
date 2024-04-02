@@ -2,6 +2,7 @@
 
 enum ScopeType : int
 {
+	ScopeType_None,
 	ScopeType_Unknown,
 	ScopeType_Namespace,
 	ScopeType_Multiple,
