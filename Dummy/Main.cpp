@@ -26,7 +26,11 @@ class MyObject
 } // namespace mynamespace
 
 namespace mynamespace::mynamespace3 {
-class MyObject;
+
+class MyObject
+{
+};
+
 } // namespace mynamespace::mynamespace3
 
 int main()
@@ -39,5 +43,15 @@ int main()
 	printf("%s\n", reflectgen::getTypeInfo<mynamespace::MyObject>()->mClassNameStr);
 	printf("%s\n", reflectgen::getTypeInfo<mynamespace::mynamespace2::MyObject>()->mClassNameStr);
 	printf("%s\n", reflectgen::getTypeInfo<mynamespace::mynamespace3::MyObject>()->mClassNameStr);
+
+	float f = 10.f;
+	const float cf = 50.f;
+	double d = 20.0;
+	uint64_t u64 = UINT64_MAX;
+
+	printf("Float value: %f\n", f);
+	printf("Double value: %f\n", d);
+	printf("Uint64 value: %llx\n", u64);
+
 	return 0;
 }

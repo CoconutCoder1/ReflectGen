@@ -150,7 +150,7 @@ void ReflectGen::tokenizeFile(const std::string& contents) noexcept
 			}
 		}
 
-		if (std::isalnum(*itr))
+		if (std::isalnum(*itr) || *itr == '_')
 		{
 			buffer.push_back(*itr);
 		}

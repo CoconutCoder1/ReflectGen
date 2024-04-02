@@ -14,6 +14,7 @@ class TypeInfo
 {
 public:
 	const char* mClassNameStr;
+	TypeInfo* mParentPtr;
 };
 
 namespace detail {
@@ -43,6 +44,8 @@ const TypeInfo* getTypeInfo() noexcept
 {
 	return detail::DTI<T>::mTypeInfoPtr;
 }
+
+void initialize();
 
 } // namespace reflectgen
 

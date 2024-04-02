@@ -37,7 +37,23 @@ public:
 		return !(mCurrentIter < mTokens.end());
 	}
 
+	void addTypeAttribute(uint32_t attribute)
+	{
+		mTypeAttributes |= attribute;
+	}
+
+	uint32_t getTypeAttributes() const
+	{
+		return mTypeAttributes;
+	}
+
+	void clearTypeAttributes()
+	{
+		mTypeAttributes = 0;
+	}
+
 private:
 	TokenList mTokens;
 	TokenList::const_iterator mCurrentIter;
+	uint32_t mTypeAttributes;
 };

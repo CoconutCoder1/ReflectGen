@@ -10,6 +10,8 @@ void BeginScopeBehavior::handle(const ReflectContext& context)
 {
 	ScopeManager* scopeManagerPtr = context.scopeManager;
 
+	context.tokenContext->clearTypeAttributes();
+
 	if (!scopeManagerPtr->shouldIgnoreScope())
 	{
 		scopeManagerPtr->pushScope("UnknownScope", ScopeType_Unknown);
