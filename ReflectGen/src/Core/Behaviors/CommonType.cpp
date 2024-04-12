@@ -33,6 +33,10 @@ void CommonTypeBehavior::handle(const ReflectContext& context)
 	const bool isVariable = (secondToken == ";" || secondToken == "=");
 	const bool isArgument = context.scopeManager->isArgumentList();
 
+	const bool isMember = !isArgument &&
+		(context.scopeManager->hasScopeType(ScopeType_Struct) ||
+		context.scopeManager->hasScopeType(ScopeType_Class));
+
 	if (isArgument)
 	{
 		auto& argList = context.scopeManager->getArgumentListContext();
@@ -42,6 +46,35 @@ void CommonTypeBehavior::handle(const ReflectContext& context)
 	else
 	{
 		labelToken = context.tokenContext->getToken(1);
+	}
+
+	if (isMember)
+	{
+		if (isVariable)
+		{
+			auto nameSpace = context.getCurrentNamespace();
+			auto& lastType = nameSpace->mChildTypes.back();
+
+
+			FieldDesc fieldDesc;
+			fieldDesc.fieldName = labelToken;
+			fieldDesc.size = mTypeSize;
+
+			if (!lastType.fields.empty())
+			{
+				const auto& lastField = lastType.fields.back();
+
+				fieldDesc.offset = lastField.offset + lastField.size;
+			}
+			else
+			{
+				fieldDesc.offset = 0;
+			}
+
+			lastType.fields.push_back(fieldDesc);
+
+			lastType.typeSize += mTypeSize;
+		}
 	}
 
 	if (isFunction)
@@ -63,14 +96,15 @@ void CommonTypeBehavior::handle(const ReflectContext& context)
 
 #if 1 /* Debug print */
 	printf(
-		"Type Detected: [ Name: \"%s\", Label: \"%s\", Size: %llx, Attributes: %x, IsVariable: %s, IsArgument: %s, IsFunction: %s ]\n",
+		"Type Detected: [ Name: \"%s\", Label: \"%s\", Size: %llx, Attributes: %x, IsVariable: %s, IsArgument: %s, IsFunction: %s, IsMember: %s ]\n",
 		mTypeNamePtr,
 		labelToken.c_str(),
 		mTypeSize,
 		mAttributes,
 		isVariable ? "Yes" : "No",
 		isArgument ? "Yes" : "No",
-		isFunction ? "Yes" : "No"
+		isFunction ? "Yes" : "No",
+		isMember ? "Yes" : "No"
 	);
 #endif
 }

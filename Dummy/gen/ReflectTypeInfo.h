@@ -14,6 +14,7 @@ class TypeInfo
 {
 public:
 	const char* mClassNameStr;
+	unsigned int mTypeSize;
 	TypeInfo* mParentPtr;
 };
 
@@ -23,9 +24,10 @@ template<typename T>
 class TypeInfoImpl : public TypeInfo
 {
 public:
-	TypeInfoImpl(const char* classNameStr) noexcept
+	TypeInfoImpl(const char* classNameStr, unsigned int typeSize) noexcept
 	{
 		mClassNameStr = classNameStr;
+		mTypeSize = typeSize;
 	}
 };
 

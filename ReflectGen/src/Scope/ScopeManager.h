@@ -18,6 +18,8 @@ public:
 	const Scope* getCurrentScope() const noexcept;
 	const std::vector<Scope>& getScopeList(ScopeType type) const noexcept;
 
+	bool hasScopeType(ScopeType type) const noexcept;
+
 	bool shouldIgnoreScope() const noexcept;
 	void enableIgnoreScope() noexcept;
 	void disableIgnoreScope() noexcept;

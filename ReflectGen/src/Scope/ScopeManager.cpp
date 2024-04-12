@@ -47,6 +47,11 @@ const std::vector<Scope>& ScopeManager::getScopeList(ScopeType type) const noexc
 	return mTypedScopes[type];
 }
 
+bool ScopeManager::hasScopeType(ScopeType type) const noexcept
+{
+	return !getScopeList(type).empty();
+}
+
 bool ScopeManager::shouldIgnoreScope() const noexcept
 {
 	return mShouldIgnoreScope;

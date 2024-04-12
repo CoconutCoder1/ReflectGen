@@ -55,7 +55,7 @@ void DescriptorContext::forwardDeclareTypes(std::ofstream& fileStream, const Nam
 
 	for (const auto& type : namespaceDescPtr->mChildTypes)
 	{
-		fileStream << type.defType << " " << type.name << ";\n";
+		fileStream << type.defType << " " << type.name << "; // Size: 0x" << std::hex << type.typeSize << " | Num Fields: " << type.fields.size() << "\n";
 
 		for (const auto& func : type.childFunctions)
 		{
@@ -90,8 +90,8 @@ void DescriptorContext::declareTypeInfo(std::ofstream& fileStream, const Namespa
 		std::string symbolName = symbolPrefix + type.name;
 
 		std::string outputLine = std::format(
-			"const TypeInfo* detail::DTI<{}>::mTypeInfoPtr = new detail::TypeInfoImpl<{}>(\"{}\");",
-			symbolName, symbolName, identifierName
+			"const TypeInfo* detail::DTI<{}>::mTypeInfoPtr = new detail::TypeInfoImpl<{}>(\"{}\", 0x{:x});",
+			symbolName, symbolName, identifierName, type.typeSize
 		);
 
 		fileStream << outputLine << "\n";
